@@ -1,0 +1,24 @@
+# Data files (too large for git)
+spatial_data/
+*.h5ad
+*.h5
+*.qs
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Output (regenerate by running scripts)
+*.png
+*.csv
