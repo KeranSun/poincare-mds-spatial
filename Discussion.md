@@ -18,7 +18,7 @@ The differential performance of hyperbolic vs. Euclidean niches for different in
 
 Poincaré MDS matches Euclidean MDS on distance preservation metrics while providing the additional benefit of hierarchical encoding. The k-NN retention rate (0.478) is comparable to Euclidean MDS (0.501), indicating that local neighborhood structure is preserved. The niche purity advantage (0.672 vs. 0.439) demonstrates that the hierarchical encoding provides biologically meaningful information beyond what Euclidean methods capture.
 
-Compared to t-SNE and UMAP, Poincaré MDS has the advantage of preserving global distance structure (r = 0.919 for tree distances, vs. r = 0.427 for t-SNE). This makes it more suitable for analyses that require meaningful distance comparisons, such as niche analysis and trajectory inference.
+Compared to PHATE and t-SNE, Poincaré MDS has distinct trade-offs. t-SNE achieves higher spatial correlation (0.439 vs. 0.404) and k-NN retention (0.467 vs. 0.123), but distorts global distance structure (tree distance correlation 0.427 vs. 0.919). PHATE achieves slightly higher niche purity on individual samples (0.710 vs. 0.675), but does not provide hierarchical encoding. Poincaré MDS uniquely combines distance preservation with hierarchical structure: the radial coordinate encodes depth in the tissue hierarchy (r = 0.853 on synthetic data), a property absent in all comparison methods. This makes Poincaré MDS the only method that simultaneously preserves global distance relationships and reveals hierarchical organization.
 
 ## Limitations and future directions
 

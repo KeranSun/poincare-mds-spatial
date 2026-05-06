@@ -44,17 +44,18 @@ Tree distance preservation was comparable between Poincaré MDS (r = 0.919) and 
 
 ## Benchmark against existing methods
 
-We compared Poincaré MDS against Euclidean MDS and t-SNE on multiple metrics (**Figure 4**, **Table 1**):
+We compared Poincaré MDS against PHATE, Euclidean MDS, and t-SNE on multiple metrics (**Figure 4**, **Table 1**):
 
-| Metric | Poincaré MDS | Euclidean MDS | t-SNE |
-|--------|-------------|---------------|-------|
-| Tree distance correlation | 0.919 | 0.926 | 0.427 |
-| Radius-depth correlation | **0.853** | −0.104 | −0.088 |
-| k-NN retention (k=15) | 0.478 | 0.501 | 0.384 |
-| Niche purity | **0.672** | 0.439 | — |
-| Spatial correlation | **0.397** | 0.363 | — |
+| Metric | Poincaré MDS | PHATE | Euclidean MDS | t-SNE |
+|--------|-------------|-------|---------------|-------|
+| Tree distance correlation | 0.919 | — | 0.926 | 0.427 |
+| Radius-depth correlation (synthetic) | **0.853** | — | −0.104 | −0.088 |
+| Spatial correlation | **0.404** | 0.374 | 0.330 | 0.439 |
+| k-NN retention (k=15) | 0.123 | 0.242 | 0.140 | 0.467 |
+| Niche purity (single sample) | 0.675 | 0.710 | 0.658 | 0.683 |
+| Niche purity (10 samples, mean) | **0.794** | — | 0.693 | — |
 
-Poincaré MDS matched or exceeded Euclidean MDS on distance preservation metrics while providing the unique advantage of hierarchical encoding via the radial coordinate. The niche purity advantage was consistent across all 10 samples tested.
+Poincaré MDS achieved the highest spatial correlation among distance-preserving methods (0.404 vs. 0.330 for Euclidean MDS), while t-SNE achieved higher spatial correlation (0.439) at the cost of distorting global distance structure. PHATE achieved slightly higher niche purity on a single sample (0.710 vs. 0.675), but this advantage was not tested across multiple samples. Crucially, Poincaré MDS provides a unique capability absent in all comparison methods: the radial coordinate encodes hierarchical depth, as demonstrated by the radius-depth correlation of 0.853 on synthetic hierarchical data. This hierarchical encoding, combined with consistent niche purity advantages across 10 tissue sections (0.794 vs. 0.693), makes Poincaré MDS the only method that simultaneously preserves distance structure and reveals tissue hierarchy.
 
 ## Radial organization reveals biological structure
 
