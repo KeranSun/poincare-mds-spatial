@@ -1,0 +1,10 @@
+numpy>=1.19
+torch>=1.9
+geoopt>=0.5.0
+scipy>=1.5
+scikit-learn>=0.24
+scanpy>=1.8
+anndata>=0.8
+pandas>=1.0
+matplotlib>=3.3
+seaborn>=0.11
