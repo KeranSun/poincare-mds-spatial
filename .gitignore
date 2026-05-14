@@ -1,5 +1,12 @@
+# Manuscript and submission files (private)
+submission/
+figures/新建文件夹/
+figures/作图指南.md
+*.docx
+
 # Data files (too large for git)
 spatial_data/
+perturbseq_data/
 *.h5ad
 *.h5
 *.qs
