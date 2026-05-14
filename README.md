@@ -8,11 +8,6 @@
 
 Poincaré MDS embeds spatial transcriptomics data into hyperbolic space, where **radial distance from the disk center encodes hierarchical layer position**. The companion framework **Hyperbolic Niche** defines cell neighborhoods using geodesic distance and detects spatially coherent ligand-receptor interactions.
 
-**Key results** (Slide-seq V2 mouse olfactory bulb):
-- Radius-layer Spearman ρ = 0.796 (p = 5.1 × 10⁻¹³⁵)
-- Hyperbolic niche purity exceeds Euclidean niche purity (Mann-Whitney p < 10⁻¹⁰)
-- Geodesic L-R co-expression detects receptor-enriched spatial niches (FDR q < 0.05)
-
 ---
 
 ## Installation
@@ -20,8 +15,8 @@ Poincaré MDS embeds spatial transcriptomics data into hyperbolic space, where *
 ### Conda (recommended)
 
 ```bash
-git clone https://github.com/KeranSun/PoincareMDS.git
-cd PoincareMDS
+git clone https://github.com/KeranSun/poincare-mds-spatial.git
+cd poincare-mds-spatial
 conda env create -f environment.yml
 conda activate poincare-mds
 pip install -e .
@@ -126,116 +121,6 @@ HyperbolicNiche(
 
 ---
 
-## Data Access
-
-This repository does **not** include raw spatial transcriptomics data. Download from:
-
-| Dataset | Source | Link |
-|---------|--------|------|
-| Slide-seq V2 (olfactory bulb) | NIH Brain Initiative | [GEO: GSE251950](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE251950) |
-| Slide-seq V2 (cerebellum) | NIH Brain Initiative | [GEO: GSE251950](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE251950) |
-
-Place downloaded files in `spatial_data/` before running analysis scripts.
-
----
-
-## Reproducing Figures
-
-### Main Figures
-
-```bash
-cd scripts
-python figure1_overview.py        # Figure 1: Poincaré disk overview
-python figure2_theoretical.py     # Figure 2: Synthetic validation
-python figure3_biological.py      # Figure 3: Hyperbolic niche analysis
-python figure4_validation.py      # Figure 4: Multi-sample validation
-python figure5_benchmark.py       # Figure 5: Method benchmark
-```
-
-### Supplementary Figures
-
-```bash
-python figure_supplementary.py    # Figures S1-S6
-python sensitivity_analysis.py    # Generates data for S3-S5
-```
-
-All figures are saved to `figures/` as both PDF and PNG.
-
----
-
-## Reproducing Results
-
-### Core Benchmarks
-
-```bash
-# Full benchmark (all methods, all datasets)
-python enhanced_benchmark.py
-
-# Bootstrap confidence intervals (50 repeats)
-python benchmark_bootstrap.py
-
-# Sensitivity analysis (k, curvature, lambda sweeps)
-python sensitivity_analysis.py
-```
-
-### Biological Discovery
-
-```bash
-# Hyperbolic niche purity analysis
-python hyperbolic_niche_analysis.py
-
-# Ligand-receptor co-expression in niches
-python lr_coexpression_niche.py
-
-# Developmental trajectory validation
-python developmental_validation.py
-```
-
-Results are saved to `results/` as CSV files.
-
----
-
-## Project Structure
-
-```
-PoincareMDS/
-├── poincare_mds/                 Core Python package
-│   ├── __init__.py               Exports: PoincareMDS, HyperbolicNiche, metrics
-│   ├── core.py                   Poincaré MDS embedding algorithm
-│   ├── niche.py                  Hyperbolic Niche analysis
-│   └── metrics.py                Evaluation metrics
-│
-├── scripts/                      Analysis and figure scripts
-│   ├── figure_style.py           Nature Methods visual standards
-│   ├── figure1_overview.py       Figure 1: Poincaré disk overview
-│   ├── figure2_theoretical.py    Figure 2: Synthetic validation
-│   ├── figure3_biological.py     Figure 3: Niche analysis
-│   ├── figure4_validation.py     Figure 4: Multi-sample validation
-│   ├── figure5_benchmark.py      Figure 5: Method benchmark
-│   ├── figure_supplementary.py   Supplementary figures S1-S6
-│   ├── enhanced_benchmark.py     Full method comparison
-│   ├── benchmark_bootstrap.py    Bootstrap CI computation
-│   ├── sensitivity_analysis.py   Hyperparameter sweeps
-│   ├── hyperbolic_niche_analysis.py  Niche purity analysis
-│   ├── lr_coexpression_niche.py  L-R co-expression detection
-│   ├── developmental_validation.py   Trajectory validation
-│   ├── stats_utils.py            Bootstrap CI, effect sizes, FDR
-│   └── ...                       Additional analysis scripts
-│
-├── results/                      CSV outputs from analyses
-├── figures/                      Generated figures (PDF + PNG)
-├── spatial_data/                 Raw data (not in repo, see Data Access)
-│
-├── poincare_mds/                 Installable package
-├── setup.py                      Package configuration
-├── environment.yml               Conda environment
-├── requirements.txt              Pip dependencies
-├── LICENSE                       MIT License
-└── README.md                     This file
-```
-
----
-
 ## Algorithm Overview
 
 Poincaré MDS performs three steps:
@@ -247,21 +132,6 @@ Poincaré MDS performs three steps:
 3. **Niche analysis**: Define neighborhoods by geodesic distance at a given percentile threshold. Compare niche purity against Euclidean baselines. Detect ligand-receptor co-expression within niches.
 
 The Poincaré ball has constant negative curvature c. Points near the center are close in Euclidean terms; points near the boundary are exponentially far apart. This geometry naturally encodes hierarchical structure: **central nodes = high-level layers, peripheral nodes = low-level layers**.
-
----
-
-## Citation
-
-```bibtex
-@article{sun2026poincare,
-  title={Poincar\'{e} MDS: Hyperbolic Embedding Reveals Hierarchical
-         Organization in Spatial Transcriptomics},
-  author={Sun, Keran and Jia, Keqi and Li, Hongru and Wei, Lin
-          and Ma, Cuiqing and Yin, Fei},
-  journal={Nature Methods},
-  year={2026}
-}
-```
 
 ---
 
